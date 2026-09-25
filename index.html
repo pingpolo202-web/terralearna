@@ -3,26 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Terra Learna is World Explorer, a globe for children. Spin it, tap Egypt, meet Tut the mummy, open the Earth, find the sea animals, and play a year of seasons. Still being built.">
+<meta name="description" content="Terra Learna is World Explorer, a globe for children. A live demo plays an example of each part, and sign-up makes a demo explorer that stays in this browser.">
 <meta name="theme-color" content="#071433">
 <title>Terra Learna</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%231a4e9a'/%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%238fd4ff' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="demo.css">
 <style>
-  :root {
-    --void: #071433;
-    --foam: #f4f8ff;
-    --mist: #c5d6f2;
-    --sun: #ffc93c;
-    --coral: #ffb1a6;
-  }
-
+  :root { --void: #071433; --sun: #ffc93c; }
   * { box-sizing: border-box; }
-
   html, body { margin: 0; min-height: 100%; overflow-x: clip; }
-
   body {
     min-height: 100dvh;
     color: #2a160c;
@@ -31,134 +23,49 @@
       radial-gradient(ellipse 42% 36% at 78% 28%, #2a62aa 0%, transparent 70%),
       linear-gradient(180deg, #071433 0%, #0d2860 46%, #16386e 100%);
   }
-
   .ground {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 60%;
+    position: fixed; left: 0; right: 0; bottom: 0; height: 58%;
     background: linear-gradient(180deg, #e0c088 0%, #c4925a 38%, #8a5434 100%);
     border-top: 7px solid #5fbf4a;
     box-shadow: 0 -18px 40px rgba(6, 16, 40, .28);
   }
-
   .stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 42%;
-    pointer-events: none;
-    background-repeat: no-repeat;
+    position: fixed; top: 0; left: 0; right: 0; height: 44%; pointer-events: none;
     background-image:
       radial-gradient(1.5px 1.5px at 12% 18%, #fff 50%, transparent 60%),
-      radial-gradient(1px 1px at 22% 72%, #fff 50%, transparent 60%),
       radial-gradient(2px 2px at 8% 46%, #fff6d6 50%, transparent 60%),
       radial-gradient(1px 1px at 30% 12%, #fff 50%, transparent 60%),
-      radial-gradient(1.5px 1.5px at 4% 84%, #fff 50%, transparent 60%),
-      radial-gradient(1px 1px at 38% 34%, rgba(255,255,255,.7) 50%, transparent 60%),
-      radial-gradient(1px 1px at 18% 28%, rgba(255,255,255,.8) 50%, transparent 60%);
+      radial-gradient(1px 1px at 18% 28%, #fff 50%, transparent 60%);
   }
-
   main {
-    position: relative;
-    z-index: 1;
+    position: relative; z-index: 1;
     display: grid;
-    grid-template-columns: minmax(18rem, 34rem) minmax(16rem, 1fr);
+    grid-template-columns: minmax(16rem, 28rem) minmax(18rem, 1fr);
     align-items: end;
-    gap: clamp(1.25rem, 4vw, 4rem);
+    gap: clamp(1.25rem, 4vw, 3rem);
     min-height: 100dvh;
-    padding: 7vh 7vw 7vh;
+    padding: 6vh 6vw;
   }
-
   h1 {
     margin: 0;
     font-family: "Baloo 2", "Segoe UI", sans-serif;
     font-weight: 800;
-    font-size: clamp(3.6rem, 6.4vw, 6.2rem);
-    line-height: 0.82;
+    font-size: clamp(3.4rem, 6vw, 5.6rem);
+    line-height: 0.84;
     letter-spacing: -0.03em;
   }
-
   .copy { min-width: 0; }
-
-  .lead {
-    max-width: 36ch;
-    margin: 0.9rem 0 0;
-    font-size: 1.2rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #5a341c;
-  }
-
-  .say {
-    max-width: 38ch;
-    margin: 0.85rem 0 0;
-    font-size: 1.12rem;
-    font-weight: 700;
-    line-height: 1.4;
-    color: #3d2414;
-  }
-
-  .play-next {
-    margin: 1rem 0 0;
-    appearance: none;
-    border: 0;
-    border-radius: 14px;
-    background: #ff9f1c;
-    color: #2a160c;
-    font: 700 1.05rem/1 "Nunito", "Segoe UI", sans-serif;
-    padding: 0.75rem 1.15rem;
-    cursor: pointer;
-  }
-
-  .play-next:focus-visible {
-    outline: 3px solid #2a160c;
-    outline-offset: 3px;
-  }
-
-  .status {
-    margin: 1rem 0 0;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: #a3241c;
-  }
-
-  .play {
-    margin: 0;
-    align-self: center;
-    justify-self: end;
-    width: min(72vh, 100%);
-  }
-
-  .play img {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 22px;
-    box-shadow: 0 18px 48px rgba(6, 16, 40, .35);
-  }
-
+  .lead, .say { max-width: 36ch; margin: 0.8rem 0 0; line-height: 1.4; }
+  .lead { font-size: 1.12rem; font-weight: 700; color: #5a341c; }
+  .say { font-size: 1.05rem; font-weight: 800; color: #3d2414; }
+  .who { margin: 0.8rem 0 0; font-weight: 800; color: #17224a; }
+  .status { margin: 0.8rem 0 0; font-weight: 800; color: #a3241c; }
   @media (max-width: 860px) {
-    main {
-      grid-template-columns: 1fr;
-      align-content: start;
-      padding: 1.25rem 1.35rem 2.5rem;
-    }
-
-    .ground { height: 74%; }
-    .stars { height: 30%; }
-
-    .play {
-      order: -1;
-      justify-self: center;
-      width: 100%;
-      margin-top: .35rem;
-    }
-
-    h1 { font-size: min(4.2rem, 14vw); }
-    .lead, .say { max-width: 100%; font-size: 1.05rem; }
+    main { grid-template-columns: 1fr; align-content: start; padding: 1rem 1.1rem 2rem; }
+    .ground { height: 70%; }
+    .stars { height: 34%; }
+    h1 { font-size: min(3.8rem, 16vw); }
+    .lead, .say { max-width: 100%; }
   }
 </style>
 </head>
@@ -168,79 +75,59 @@
   <main>
     <div class="copy">
       <h1>Terra<br>Learna</h1>
-      <p class="lead">World Explorer is a globe for children. This is a real play, from the app.</p>
-      <p class="say" id="play-say"></p>
-      <button type="button" class="play-next" id="play-next">Tap Egypt</button>
-      <p class="status">Still being built.</p>
+      <p class="lead">World Explorer is a globe for children. This demo plays an example of each part by itself. Tap one to try it.</p>
+      <p class="say" id="play-say" aria-live="polite"></p>
+      <p class="who" id="who" hidden></p>
+      <p class="status">Still being built. Sign-up here is only a demo.</p>
     </div>
-    <figure class="play">
-      <img id="play-shot" width="1280" height="800" alt="">
-    </figure>
+    <div class="model" id="model" data-section="countries">
+      <div class="stage">
+        <div class="sun" aria-hidden="true"></div>
+        <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="globe">
+          <div class="half cut" aria-hidden="true">
+            <span class="crust"></span>
+            <span class="mantle"></span>
+            <span class="outer"></span>
+            <span class="inner"></span>
+          </div>
+          <div class="half face">
+            <svg class="map" viewBox="0 0 200 200" aria-hidden="true">
+              <path class="land" d="M104 34c14 2 22 12 20 24 12 6 22 16 18 32-4 18-8 36-22 52-12 14-28 8-34-8-16 6-26-8-22-24 4-14-2-28 10-36 2-16 14-36 30-40z"/>
+              <path class="land" d="M92 28c16-8 36-2 34 12-14 4-28 2-34-12z"/>
+              <path class="land sa" d="M34 86c12-2 20 12 16 28-4 18-8 28-16 26-10-4-14-24-10-38 2-8 6-16 10-16z"/>
+            </svg>
+            <span class="eq"></span>
+            <span class="shade"></span>
+            <span class="gold"></span>
+            <span class="desert"></span>
+            <span class="swimmer" aria-hidden="true">🐋</span>
+            <button type="button" class="pin egypt" data-example="egypt">Egypt</button>
+            <button type="button" class="pin crust" data-example="crust">Crust</button>
+            <button type="button" class="pin air" data-example="air">Troposphere</button>
+            <button type="button" class="pin whale" data-example="whale">Humpback</button>
+            <button type="button" class="pin month" data-example="year">September</button>
+            <button type="button" class="pin start" data-example="lesson">Start</button>
+          </div>
+        </div>
+        <p class="tut">Hi! I’m Tut the mummy. Tap me to explore Egypt.</p>
+        <article class="card example" id="card" aria-live="polite"></article>
+        <form class="card signup" id="signup-form" hidden>
+          <div id="signup-fields">
+            <label for="demo-name">Your name</label>
+            <input id="demo-name" name="name" maxlength="24" autocomplete="nickname" required>
+            <button type="submit">Make my demo explorer</button>
+          </div>
+          <div id="welcome" hidden>
+            <h2>Hi <strong></strong></h2>
+            <p>Your demo explorer is ready. It stays in this browser. Nothing was sent.</p>
+            <button type="button" class="forget" id="forget">Forget this demo</button>
+          </div>
+        </form>
+      </div>
+      <ol class="sections" id="sections" aria-label="Parts of World Explorer"></ol>
+    </div>
   </main>
-
-<script>
-(function () {
-  var frames = [
-    {
-      src: "play/01-globe.jpg",
-      alt: "World Explorer's globe, with Africa facing forward. The hint says: Tap any country to learn about it.",
-      say: "The globe is waiting. It says: tap any country to learn about it.",
-      next: "Tap Egypt"
-    },
-    {
-      src: "play/02-egypt.jpg",
-      alt: "Egypt outlined on the globe, Cairo marked with a star, and Tut the mummy beside the Egypt card. Capital Cairo. The Great Pyramids are over 4,500 years old.",
-      say: "Egypt turns to face you. Tut the mummy says hello. The capital is Cairo, and the Great Pyramids are over 4,500 years old.",
-      next: "Open the lessons"
-    },
-    {
-      src: "play/03-lesson.jpg",
-      alt: "Egypt lessons for ages 8 to 11. Tut says to start with Welcome to Egypt. Modules include the River Nile, Desert Land, Ancient Egypt and Egypt Today.",
-      say: "Tut says: pick a module. He would start with Welcome to Egypt. Six short lessons, for ages 8 to 11.",
-      next: "Open the Earth"
-    },
-    {
-      src: "play/04-inside.jpg",
-      alt: "The Earth split open into two halves, labelled Crust, Mantle, Outer Core and Inner Core.",
-      say: "The Earth opens like a fruit. Crust, mantle, outer core, inner core. Tap any layer.",
-      next: "Find the sea animals"
-    },
-    {
-      src: "play/05-sea.jpg",
-      alt: "The globe with sea animals on the water, the Red Sea reefs marked, and the hint: Tap a sea animal. Some are on a long trip.",
-      say: "Sea life comes out. It says: tap a sea animal. Some are on a long trip. The Red Sea reefs are marked.",
-      next: "Play a year"
-    },
-    {
-      src: "play/06-seasons.jpg",
-      alt: "September. A smiling Sun lights the Earth. Autumn in the top half, spring in the bottom half, and a button that says Play a year.",
-      say: "September. The Earth leans. The half leaning towards the Sun has summer. Press Play a year.",
-      next: "Start again"
-    }
-  ];
-  var i = 0;
-  var img = document.getElementById("play-shot");
-  var say = document.getElementById("play-say");
-  var btn = document.getElementById("play-next");
-  var held = false;
-  function show(n) {
-    i = (n + frames.length) % frames.length;
-    var f = frames[i];
-    img.src = f.src;
-    img.alt = f.alt;
-    say.textContent = f.say;
-    btn.textContent = f.next;
-  }
-  btn.addEventListener("click", function () {
-    held = true;
-    show(i + 1);
-  });
-  show(0);
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (!reduce) {
-    setInterval(function () { if (!held) show(i + 1); }, 7000);
-  }
-})();
-</script>
+  <script src="demo.js"></script>
 </body>
 </html>

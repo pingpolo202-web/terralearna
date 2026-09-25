@@ -1,0 +1,299 @@
+.model {
+  align-self: center;
+  justify-self: end;
+  width: min(34rem, 100%);
+  min-width: 0;
+}
+
+.stage {
+  position: relative;
+  height: min(58vh, 28rem);
+  border-radius: 22px;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 70% 42%, #2b62b8 0%, #17357e 46%, #0b1d4d 100%);
+  box-shadow: 0 18px 48px rgba(6, 16, 40, .35);
+}
+
+.sun, .rings, .swimmer, .tut, .eq, .shade, .gold, .desert { pointer-events: none; }
+
+.sun {
+  position: absolute;
+  left: -3.2rem;
+  top: 18%;
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 40%, #fff6c2, #ffc93c 42%, #ff9f1c 70%, transparent 72%);
+  opacity: 0;
+  transform: translateX(-1.5rem);
+  transition: opacity .5s ease, transform .6s ease;
+}
+
+.rings {
+  position: absolute;
+  inset: 8% 12%;
+  opacity: 0;
+  transform: scale(.86);
+  transition: opacity .45s ease, transform .6s ease;
+}
+
+.rings i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 10px solid rgba(127, 211, 255, .45);
+}
+
+.rings i:nth-child(2) { inset: 7%; border-color: rgba(79, 168, 255, .4); }
+.rings i:nth-child(3) { inset: 14%; border-color: rgba(107, 79, 216, .45); }
+
+.globe {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(68%, 18rem);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+}
+
+.half {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: transform .7s ease;
+}
+
+.face {
+  background: radial-gradient(circle at 62% 38%, #4c8ed8, #1d5aab 55%, #123872);
+  box-shadow: inset -18px -12px 30px rgba(4, 12, 32, .35), 0 0 0 10px rgba(127, 211, 255, .16);
+}
+
+.map { display: block; width: 100%; height: 100%; }
+
+.land { fill: #e07a3d; }
+.land.sa { fill: #3aaa5a; }
+
+.cut {
+  opacity: 0;
+  background: #6e4a2c;
+}
+
+.cut span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cut .crust { width: 100%; height: 100%; background: #5fbf4a; }
+.cut .mantle { width: 86%; height: 86%; background: radial-gradient(circle, #ff9a2e, #f2542d 60%, #a3241c); }
+.cut .outer { width: 52%; height: 52%; background: radial-gradient(circle, #ffe26a, #ff9f1c); }
+.cut .inner { width: 24%; height: 24%; background: radial-gradient(circle, #fffef2, #fff2a8); }
+
+.eq {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(90deg, #ffd54f 0 8px, transparent 8px 12px);
+  box-shadow: 0 0 10px #ffc93c;
+  transform: scaleX(0);
+  transition: transform .5s ease;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 36%, rgba(4, 10, 28, .72) 78%);
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+
+.gold {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px #ffd54f, 0 0 18px #ffc93c;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.desert {
+  position: absolute;
+  left: 46%;
+  top: 34%;
+  width: 28%;
+  height: 16%;
+  border-radius: 50%;
+  background: #e4c27a;
+  opacity: 0;
+  transition: opacity .4s ease;
+}
+
+.pin {
+  position: absolute;
+  z-index: 2;
+  display: none;
+  border: 0;
+  border-radius: 999px;
+  background: #fff;
+  color: #17224a;
+  font: 800 0.82rem/1 "Nunito", sans-serif;
+  padding: 0.45rem 0.7rem;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(8, 18, 48, .28);
+}
+
+.pin:focus-visible { outline: 3px solid #ffc93c; outline-offset: 2px; }
+
+.pin.egypt { left: 46%; top: 40%; }
+.pin.crust { left: 4%; top: 18%; }
+.pin.air { left: 6%; top: 8%; }
+.pin.whale { right: 8%; bottom: 16%; }
+.pin.month { left: 8%; bottom: 10%; }
+.pin.start { right: 8%; top: 12%; }
+
+.swimmer {
+  position: absolute;
+  left: 18%;
+  top: 62%;
+  font-size: 1.4rem;
+  opacity: 0;
+}
+
+.tut {
+  position: absolute;
+  right: 6%;
+  bottom: 8%;
+  max-width: 11rem;
+  margin: 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 14px;
+  background: #fff;
+  color: #17224a;
+  font-size: 0.85rem;
+  font-weight: 700;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .35s ease, transform .35s ease;
+}
+
+.card {
+  position: absolute;
+  z-index: 3;
+  right: 0.7rem;
+  bottom: 0.7rem;
+  width: min(16rem, calc(100% - 1.4rem));
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, .94);
+  color: #17224a;
+  box-shadow: 0 12px 28px rgba(8, 18, 48, .25);
+}
+
+.card h2 { margin: 0; font-size: 1.15rem; }
+.card p { margin: 0.35rem 0 0; font-size: 0.92rem; font-weight: 700; line-height: 1.35; }
+
+.signup label { display: block; font-weight: 800; font-size: 0.92rem; }
+.signup input {
+  display: block;
+  width: 100%;
+  margin-top: 0.35rem;
+  border: 2px solid #d7deef;
+  border-radius: 10px;
+  padding: 0.45rem 0.55rem;
+  font: 700 1rem "Nunito", sans-serif;
+  color: #17224a;
+}
+.signup button, .forget {
+  margin-top: 0.55rem;
+  border: 0;
+  border-radius: 12px;
+  background: #ff9f1c;
+  color: #2a160c;
+  font: 800 0.95rem "Nunito", sans-serif;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+}
+.forget { background: transparent; color: #5a341c; padding-left: 0; }
+
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sections button {
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .72);
+  color: #2a160c;
+  font: 800 0.78rem/1 "Nunito", sans-serif;
+  padding: 0.4rem 0.6rem;
+  cursor: pointer;
+}
+
+.sections button[aria-current="true"] { background: #17224a; color: #f4f8ff; }
+.sections button:focus-visible { outline: 3px solid #2a160c; outline-offset: 2px; }
+
+.model[data-section="countries"] .pin.egypt,
+.model[data-section="continents"] .pin.egypt,
+.model[data-section="nature"] .pin.egypt,
+.model[data-section="equator"] .pin.egypt,
+.model[data-section="oceans"] .pin.egypt,
+.model[data-section="inside"] .pin.crust,
+.model[data-section="atmosphere"] .pin.air,
+.model[data-section="sealife"] .pin.whale,
+.model[data-section="seasons"] .pin.month,
+.model[data-section="lessons"] .pin.start { display: inline-flex; }
+
+.model[data-section="countries"] .globe { animation: sway 7s ease-in-out infinite; }
+.model[data-section="inside"] .face { transform: translateX(20%); }
+.model[data-section="inside"] .cut { opacity: 1; transform: translateX(-20%); }
+.model[data-section="atmosphere"] .rings { opacity: 1; transform: scale(1); }
+.model[data-section="sun"] .sun,
+.model[data-section="seasons"] .sun { opacity: 1; transform: none; }
+.model[data-section="sun"] .shade,
+.model[data-section="seasons"] .shade { opacity: 1; }
+.model[data-section="seasons"] .globe { transform: translate(-50%, -50%) rotate(-14deg); }
+.model[data-section="equator"] .eq { transform: scaleX(1); }
+.model[data-section="continents"] .gold,
+.model[data-section="nature"] .desert { opacity: 1; }
+.model[data-section="oceans"] .face {
+  background: radial-gradient(circle at 50% 60%, #1a4f9c, #0c3a78 40%, #082448 78%);
+}
+.model[data-section="sealife"] .swimmer { opacity: 1; animation: swim 5.5s linear infinite; }
+.model[data-section="lessons"] .tut { opacity: 1; transform: none; }
+.model[data-section="signup"] .card.example { display: none; }
+
+@keyframes sway {
+  0%, 100% { transform: translate(-50%, -50%) rotate(-4deg); }
+  50% { transform: translate(-50%, -50%) rotate(5deg); }
+}
+
+@keyframes swim {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(7rem, -2.2rem); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .model[data-section="countries"] .globe,
+  .model[data-section="sealife"] .swimmer { animation: none; }
+  .half, .rings, .sun, .eq, .shade, .tut { transition: none; }
+}
+
+@media (max-width: 860px) {
+  .model { order: -1; justify-self: stretch; }
+  .stage { height: 22rem; }
+}
